@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include "Engine/Texture2D.h"
 #include "Item.generated.h"
 
 UENUM(BlueprintType)
@@ -16,16 +17,19 @@ struct FItem{
 	
 	GENERATED_BODY()
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Struct")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText ItemName;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Struct")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	TEnumAsByte<EItemType> ItemType;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
+	TSubclassOf<UTexture2D> Image;
 	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Struct")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	int32 Quantity;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Struct")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	bool bCombinable;
 
 
