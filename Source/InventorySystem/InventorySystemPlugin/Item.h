@@ -3,13 +3,16 @@
 #pragma once
 
 #include "Engine/Texture2D.h"
+#include "Engine/DataTable.h"
 #include "Item.generated.h"
 
-UENUM(BlueprintType)
-enum EItemType{
-	ITEMTYPE_QUEST	UMETA(DisplayName = "Quest Item"),
-	ITEMTYPE_ARMOR	UMETA(DisplayName = "Armor"),
-	ITEMTYPE_WEAPON	UMETA(DisplayName = "Weapon")
+USTRUCT(BlueprintType)
+struct FItemType : public FTableRowBase {
+	GENERATED_BODY()
+
+public:	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Type")
+	FText ItemType;
 };
 
 USTRUCT(BlueprintType)
@@ -21,7 +24,7 @@ struct FItem{
 	FText ItemName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	TEnumAsByte<EItemType> ItemType;
+	TSubclassOf<FItemType> ItemType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	TSubclassOf<UTexture2D> Image;
@@ -31,6 +34,17 @@ struct FItem{
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	bool bCombinable;
+
+
+};
+
+USTRUCT(BlueprintType)
+struct FItemList : public FTableRowBase {
+	GENERATED_BODY()
+
+public:
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Data")
+	FItem ItemList;
 
 
 };
