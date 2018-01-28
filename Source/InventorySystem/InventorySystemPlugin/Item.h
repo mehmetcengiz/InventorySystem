@@ -6,13 +6,12 @@
 #include "Engine/DataTable.h"
 #include "Item.generated.h"
 
-USTRUCT(BlueprintType)
-struct FItemType : public FTableRowBase {
-	GENERATED_BODY()
-
-public:	
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Type")
-	FText ItemType;
+UENUM(BlueprintType)
+enum class EItemType : uint8{
+	NONE	UMETA(DisplayName = "None"),
+	ARMOR	UMETA(DisplayName = "Armor"),
+	WEAPON	UMETA(DisplayName = "Weapon"),
+	BUILDING_METERIAL	UMETA(DisplayName = "Building Meterial")
 };
 
 USTRUCT(BlueprintType)
@@ -24,7 +23,7 @@ struct FItem{
 	FText ItemName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	TSubclassOf<FItemType> ItemType;
+	TEnumAsByte<EItemType >ItemType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	TSubclassOf<UTexture2D> Image;
@@ -34,7 +33,6 @@ struct FItem{
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	bool bCombinable;
-
 
 };
 
