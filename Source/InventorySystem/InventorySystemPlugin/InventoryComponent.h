@@ -24,10 +24,5 @@ protected:
 	virtual void BeginPlay() override;
 
 	UPROPERTY(EditDefaultsOnly,Category = "Inventory Items")
-	TArray<FItem> InventoryItems;
-
-//private:	
-
-		
-	
+	TArray<FItem> InventoryItems;	
 };
