@@ -23,7 +23,7 @@ struct FQuest {
 	FText QuestName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	TEnumAsByte<EQuestStatus>ItemType;
+	TEnumAsByte<EQuestStatus>QuestStatus;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText QuestDetail;
