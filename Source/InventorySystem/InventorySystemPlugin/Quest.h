@@ -9,6 +9,7 @@
 
 UENUM(BlueprintType)
 enum class EQuestStatus : uint8 {
+	LOCKED		UMETA(DisplayName = "Locked"),
 	ACTIVE		UMETA(DisplayName = "Active"),
 	FINISHED	UMETA(DisplayName = "Finished"),
 	FAILED		UMETA(DisplayName = "Failed")
@@ -20,6 +21,9 @@ struct FQuest {
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
+	FText QuestID;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText QuestName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
@@ -27,6 +31,8 @@ struct FQuest {
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText QuestDetail;
+
+
 
 };
 
