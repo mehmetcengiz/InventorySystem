@@ -10,18 +10,16 @@
 UENUM(BlueprintType)
 enum class EQuestStatus : uint8 {
 	LOCKED		UMETA(DisplayName = "Locked"),
+	AVAILABLE	UMETA(DisplayName = "Available"),
 	ACTIVE		UMETA(DisplayName = "Active"),
 	FINISHED	UMETA(DisplayName = "Finished"),
 	FAILED		UMETA(DisplayName = "Failed")
 };
 
 USTRUCT(BlueprintType)
-struct FQuest {
+struct FQuest : public FTableRowBase {
 
 	GENERATED_BODY()
-
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	FText QuestID;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText QuestName;
