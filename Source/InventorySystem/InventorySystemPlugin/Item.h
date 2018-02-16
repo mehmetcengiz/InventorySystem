@@ -4,6 +4,7 @@
 
 #include "Engine/Texture2D.h"
 #include "Engine/DataTable.h"
+#include "Components/Image.h"
 #include "Item.generated.h"
 
 UENUM(BlueprintType)
@@ -23,7 +24,7 @@ struct FItem{
 	FText ItemName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	TEnumAsByte<EItemType >ItemType;
+	TEnumAsByte<EItemType>ItemType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	TSubclassOf<UTexture2D> Image;
