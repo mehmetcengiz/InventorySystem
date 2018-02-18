@@ -30,12 +30,12 @@ protected:
 	// Called when the game starts
 	virtual void BeginPlay() override;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Inventory Items")
+	UPROPERTY(EditAnywhere, Category = "Inventory Items")
 	FItem EmtySlot;
 
-	UPROPERTY(EditDefaultsOnly,Category = "Inventory Items")
+	UPROPERTY(EditAnywhere,Category = "Inventory Items")
 	TArray<FItem> InventoryItems;	
 
-	UPROPERTY(EditDefaultsOnly, Category = "Inventory Items")
+	UPROPERTY(EditAnywhere, Category = "Inventory Items")
 	int32 InventorySize = 20;
 };

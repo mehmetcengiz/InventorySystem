@@ -27,7 +27,7 @@ struct FItem{
 	TEnumAsByte<EItemType>ItemType;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
-	TSubclassOf<UTexture2D> Image;
+	UTexture2D* Image;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	int32 Quantity;
