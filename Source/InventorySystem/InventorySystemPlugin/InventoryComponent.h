@@ -9,15 +9,15 @@
 
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class INVENTORYSYSTEM_API UInventoryComponent : public UActorComponent
-{
-	GENERATED_BODY()
 
-public:	
+class INVENTORYSYSTEM_API UInventoryComponent : public UActorComponent {
+GENERATED_BODY()
+
+public:
 	// Sets default values for this component's properties
 	UInventoryComponent();
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
 	UFUNCTION(BlueprintCallable,Category="Inventory Items")
 	TArray<FItem> GetInventoryItems() { return InventoryItems; }
@@ -25,16 +25,13 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
 	int32 GetInventorySize() { return InventorySize; }
 
-	
+
 protected:
 	// Called when the game starts
-	virtual void BeginPlay() override;
-
-	UPROPERTY(EditAnywhere, Category = "Inventory Items")
-	FItem EmtySlot;
+	void BeginPlay() override;
 
 	UPROPERTY(EditAnywhere,Category = "Inventory Items")
-	TArray<FItem> InventoryItems;	
+	TArray<FItem> InventoryItems;
 
 	UPROPERTY(EditAnywhere, Category = "Inventory Items")
 	int32 InventorySize = 20;
