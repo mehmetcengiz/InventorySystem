@@ -35,6 +35,9 @@ struct FItem{
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	bool bCombinable;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
+	int32 SlotIndex;
+
 };
 
 USTRUCT(BlueprintType)
