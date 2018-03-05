@@ -16,9 +16,9 @@ UInventoryComponent::UInventoryComponent() {
 void UInventoryComponent::BeginPlay() {
 	Super::BeginPlay();
 
+	
 
 }
-
 
 // Called every frame
 void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
@@ -26,4 +26,13 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+
+void UInventoryComponent::SwitchItemSlots(FItem DraggedItem, FItem DroppedTo) {
+
+}
+
+void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
+	
 }

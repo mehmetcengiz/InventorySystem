@@ -35,4 +35,12 @@ protected:
 
 	UPROPERTY(EditAnywhere, Category = "Inventory Items")
 	int32 InventorySize = 20;
+
+public:
+	
+	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	void SwitchItemSlots(FItem DraggedItem, FItem DroppedTo);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	void SetItemSlot(FItem Item, int32 NewSlot);
 };
