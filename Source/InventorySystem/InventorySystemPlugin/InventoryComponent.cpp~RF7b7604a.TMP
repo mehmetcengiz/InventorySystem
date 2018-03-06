@@ -29,23 +29,17 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 }
 
 
-void UInventoryComponent::SwapItemSlots(FItem DraggedItem, FItem DroppedTo) {
-	for (int32 i = 0; i < InventoryItems.Num(); i++) {
-		if(InventoryItems[i].SlotIndex == DraggedItem.SlotIndex) {
-			InventoryItems.RemoveAt(i);
-		}
-		if(InventoryItems[i].SlotIndex == DroppedTo.SlotIndex) {
-			InventoryItems.RemoveAt(i);
+void UInventoryComponent::SwitchItemSlots(FItem DraggedItem, FItem DroppedTo) {
+
+	for (FItem item : InventoryItems) {
+		if(item.SlotIndex == DraggedItem.SlotIndex) {
+			//InventoryItems.Remove(item);
+			UE_LOG(LogTemp, Warning, TEXT("Deleted."));
+		}else if(item.SlotIndex == DroppedTo.SlotIndex) {
+			//InventoryItems.Remove(item);
+			UE_LOG(LogTemp, Warning, TEXT("Other Deleted."));
 		}
 	}
-
-	int32 BufferSlotIndex = DraggedItem.SlotIndex;
-	DraggedItem.SlotIndex = DroppedTo.SlotIndex;
-	DroppedTo.SlotIndex = BufferSlotIndex;
-
-	InventoryItems.Add(DraggedItem);
-	InventoryItems.Add(DroppedTo);
-	
 }
 
 void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
