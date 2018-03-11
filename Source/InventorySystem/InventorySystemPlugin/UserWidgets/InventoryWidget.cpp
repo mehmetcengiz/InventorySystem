@@ -17,8 +17,12 @@ UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer)
 
 bool UInventoryWidget::Initialize() {
 
-
+	//UE_LOG(LogTemp, Warning, TEXT("I initializeddd!!!!"));
 	return false;
+}
+
+void UInventoryWidget::NativeConstruct() {
+	UE_LOG(LogTemp, Warning, TEXT("I Constructeeddd!!!!"));
 }
 
 void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {

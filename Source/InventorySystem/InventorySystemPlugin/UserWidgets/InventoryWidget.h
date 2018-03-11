@@ -19,11 +19,22 @@ public:
 
 protected:
 	virtual bool Initialize() override;
+	virtual void NativeConstruct() override;
+
 	void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
 
-private:
-
 	TSubclassOf<class UUserWidget> InventoryItemClass;
+
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
+	TArray<UUserWidget*> InventoryItems_Cpp;
+
+	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
+	class UButton* BtnTrash;
+
+	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
+	class UWrapBox* WBoxInventory;
+	
+private:
 
 	void GetCharacterInventoryRef();
 	void CreateItemSlots();
