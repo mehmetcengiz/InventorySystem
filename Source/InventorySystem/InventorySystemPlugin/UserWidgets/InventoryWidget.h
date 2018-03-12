@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "InventoryWidget.generated.h"
 
+struct FItem;
 /**
  * 
  */
@@ -41,6 +42,6 @@ private:
 	void GetCharacterInventoryComponentRef();
 	void CreateItemSlots();
 	void RefreshInventory();
-	void SwapItemsBySlot();
-	void ChangeItemSlot();
+	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
+	void ChangeItemSlot(FItem Item, int32 Index);
 };

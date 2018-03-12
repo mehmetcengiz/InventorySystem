@@ -82,17 +82,20 @@ void UInventoryWidget::RefreshInventory() {
 		UItemWidget* Item_widget = InventoryItemWidgets[inventory_item.SlotIndex];
 		//TODO Item_widget->SetItem(inventory_item);
 		//TODO Item_widget->SetIsSlotHasItem(true);
-
 	}
 
 }
 
-void UInventoryWidget::SwapItemsBySlot() {
-	
+void UInventoryWidget::SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo) {
+	if (!ensure(InventoryComponent != NULL)) return;
+	InventoryComponent->SwapItemSlots(DraggedItem, DroppedTo);
+	RefreshInventory();
 }
 
-void UInventoryWidget::ChangeItemSlot() {
-	
+void UInventoryWidget::ChangeItemSlot(FItem Item, int32 Index) {
+	if (!ensure(InventoryComponent != NULL)) return;
+	InventoryComponent->SetItemSlot(Item, Index);
+	RefreshInventory();
 }
 
 void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
