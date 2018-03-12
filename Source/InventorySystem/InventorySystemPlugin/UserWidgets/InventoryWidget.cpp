@@ -31,10 +31,6 @@ void UInventoryWidget::NativeConstruct() {
 	RefreshInventory();
 }
 
-void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
-	
-}
-
 void UInventoryWidget::GetCharacterInventoryRef() {
 	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!ensure(PlayerCharacter != NULL)) return;
@@ -45,7 +41,23 @@ void UInventoryWidget::GetCharacterInventoryRef() {
 }
 
 void UInventoryWidget::CreateItemSlots() {
+
+	UWorld* World = this->GetWorld();
+	if (!ensure(World != NULL)) return;
+
+	if (!ensure(InventoryComponent != NULL)) return;
+	int32 InventorySize = InventoryComponent->GetInventorySize();
 	
+	for (int32 i = 0; i < InventorySize; i++){
+		UItemWidget* ItemWidget = CreateWidget<UItemWidget>(World,InventoryItemClass);
+		if (!ensure(ItemWidget != NULL)) return;
+	
+		InventoryItemWidgets.Add(ItemWidget);
+		WBoxInventory->AddChild(ItemWidget);
+
+		//TODO ItemWidget->SetSlotIndex(i);
+		//TODO ItemWidget->SetInventoryRef(this);
+	}
 }
 
 void UInventoryWidget::RefreshInventory() {
@@ -57,5 +69,9 @@ void UInventoryWidget::SwapItemsBySlot() {
 }
 
 void UInventoryWidget::ChangeItemSlot() {
+	
+}
+
+void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
 	
 }
