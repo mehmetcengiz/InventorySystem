@@ -26,7 +26,7 @@ protected:
 	TSubclassOf<class UUserWidget> InventoryItemClass;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
-	TArray<UUserWidget*> InventoryItems_Cpp;
+	TArray<UUserWidget*> InventoryItemWidgets;
 
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UButton* BtnTrash;
@@ -34,13 +34,13 @@ protected:
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UWrapBox* WBoxInventory;
 	
-private:
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
+	class UInventoryComponent* InventoryComponent;
 
+private:
 	void GetCharacterInventoryRef();
 	void CreateItemSlots();
 	void RefreshInventory();
 	void SwapItemsBySlot();
 	void ChangeItemSlot();
-	
-	
 };
