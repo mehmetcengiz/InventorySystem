@@ -29,14 +29,14 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
 	TArray<UItemWidget*> InventoryItemWidgets;
 
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
+	class UInventoryComponent* InventoryComponent;
+
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UButton* BtnTrash;
 
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UWrapBox* WBoxInventory;
-	
-	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
-	class UInventoryComponent* InventoryComponent;
 
 private:
 	void GetCharacterInventoryComponentRef();

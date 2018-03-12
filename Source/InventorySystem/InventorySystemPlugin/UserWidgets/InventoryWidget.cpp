@@ -21,6 +21,13 @@ UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer)
 }
 
 bool UInventoryWidget::Initialize() {
+	bool Success = Super::Initialize();
+	if (!ensure(Success != NULL)) return false;
+
+	if (!ensure(BtnTrash != NULL)) return false;
+	if (!ensure(WBoxInventory != NULL)) return false;
+
+	//TODO BtnTrash->OnClicked.AddDynamic(this, &UInventoryWidget::ThrowItemToTrash);
 
 	//UE_LOG(LogTemp, Warning, TEXT("I initializeddd!!!!"));
 	return false;
