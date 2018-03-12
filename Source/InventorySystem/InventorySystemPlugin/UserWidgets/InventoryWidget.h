@@ -23,10 +23,10 @@ protected:
 
 	void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
 
-	TSubclassOf<class UUserWidget> InventoryItemClass;
+	TSubclassOf<class UItemWidget> InventoryItemClass;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
-	TArray<UUserWidget*> InventoryItemWidgets;
+	TArray<UItemWidget*> InventoryItemWidgets;
 
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UButton* BtnTrash;

@@ -11,6 +11,7 @@
 
 #include "ItemWidget.h"
 #include "InventorySystemPlugin/InventoryComponent.h"
+#include "InventorySystemPlugin/Item.h"
 
 
 UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer) : Super(ObjectInitializer) {
@@ -61,7 +62,29 @@ void UInventoryWidget::CreateItemSlots() {
 }
 
 void UInventoryWidget::RefreshInventory() {
-	
+	for (auto item_widget : InventoryItemWidgets) {
+		//TODO item_widget->SetIsSlotHasItem(false);
+		FItem Item;
+		Item.ItemName = FText::GetEmpty();
+		Item.ItemType = EItemType::NONE;
+		//TODO Item.Image 
+		Item.Quantity = 0;
+		Item.bCombinable = false;
+		Item.SlotIndex = -1;
+		
+		//TODO item_widget->SetItem(Item);
+	}
+
+	if (!ensure(InventoryComponent != NULL)) return;
+	TArray<FItem> CurrentInventoryItems = InventoryComponent->GetInventoryItems();
+
+	for (FItem inventory_item : CurrentInventoryItems) {
+		UItemWidget* Item_widget = InventoryItemWidgets[inventory_item.SlotIndex];
+		//TODO Item_widget->SetItem(inventory_item);
+		//TODO Item_widget->SetIsSlotHasItem(true);
+
+	}
+
 }
 
 void UInventoryWidget::SwapItemsBySlot() {
