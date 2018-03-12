@@ -38,7 +38,7 @@ protected:
 	class UInventoryComponent* InventoryComponent;
 
 private:
-	void GetCharacterInventoryRef();
+	void GetCharacterInventoryComponentRef();
 	void CreateItemSlots();
 	void RefreshInventory();
 	void SwapItemsBySlot();

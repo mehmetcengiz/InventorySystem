@@ -27,12 +27,12 @@ bool UInventoryWidget::Initialize() {
 }
 
 void UInventoryWidget::NativeConstruct() {
-	GetCharacterInventoryRef();
+	GetCharacterInventoryComponentRef();
 	CreateItemSlots();
 	RefreshInventory();
 }
 
-void UInventoryWidget::GetCharacterInventoryRef() {
+void UInventoryWidget::GetCharacterInventoryComponentRef() {
 	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!ensure(PlayerCharacter != NULL)) return;
 
@@ -62,6 +62,7 @@ void UInventoryWidget::CreateItemSlots() {
 }
 
 void UInventoryWidget::RefreshInventory() {
+	//Clean inventory widgets.
 	for (auto item_widget : InventoryItemWidgets) {
 		//TODO item_widget->SetIsSlotHasItem(false);
 		FItem Item;
@@ -70,8 +71,7 @@ void UInventoryWidget::RefreshInventory() {
 		//TODO Item.Image 
 		Item.Quantity = 0;
 		Item.bCombinable = false;
-		Item.SlotIndex = -1;
-		
+		Item.SlotIndex = -1;	
 		//TODO item_widget->SetItem(Item);
 	}
 
