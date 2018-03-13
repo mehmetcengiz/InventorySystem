@@ -37,6 +37,9 @@ protected:
 
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UWrapBox* WBoxInventory;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory Stlye")
+	UTexture2D* DefaultImage;
 
 private:
 	void GetCharacterInventoryComponentRef();

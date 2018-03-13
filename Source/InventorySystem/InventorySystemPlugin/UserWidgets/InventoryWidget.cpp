@@ -77,7 +77,7 @@ void UInventoryWidget::RefreshInventory() {
 		FItem Item;
 		Item.ItemName = FText::GetEmpty();
 		Item.ItemType = EItemType::NONE;
-		//TODO Item.Image // Set item to default image.
+		Item.Image = DefaultImage;
 		Item.Quantity = 0;
 		Item.bCombinable = false;
 		Item.SlotIndex = -1;	
