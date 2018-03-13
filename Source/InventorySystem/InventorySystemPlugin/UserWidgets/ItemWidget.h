@@ -20,6 +20,24 @@ class INVENTORYSYSTEM_API UItemWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
+public:
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetImage(UTexture2D* ImgToSet) { ImgItem = ImgToSet; }
+
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetQuantity(FText QuantityToSet) { TxtQuantity = QuantityToSet; }
+
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetItemInfo(FItem ItemInfoToSet) { ItemInfo = ItemInfoToSet; }
+
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetSlotIndex(int32 SlotIndexToSet) { SlotIndex = SlotIndexToSet; }
+	
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetIsSlotHasItem(bool bBoolToSet) { bIsSlotHasItem = bBoolToSet; }
+	
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")
+	void SetInventoryWidgetRef(UInventoryWidget* InventoryWidgetRefToSet) { InventoryWidgetRef = InventoryWidgetRefToSet; }
 
 protected:
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)

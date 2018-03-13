@@ -18,6 +18,8 @@ UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer)
 	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_Item"));
 	if (!ensure(InventoryItemBPClass.Class != nullptr)) return;
 	InventoryItemClass = InventoryItemBPClass.Class;
+
+
 }
 
 bool UInventoryWidget::Initialize() {
@@ -63,23 +65,23 @@ void UInventoryWidget::CreateItemSlots() {
 		InventoryItemWidgets.Add(ItemWidget);
 		WBoxInventory->AddChild(ItemWidget);
 
-		//TODO ItemWidget->SetSlotIndex(i);
-		//TODO ItemWidget->SetInventoryRef(this);
+		ItemWidget->SetSlotIndex(i);
+		ItemWidget->SetInventoryWidgetRef(this);
 	}
 }
 
 void UInventoryWidget::RefreshInventory() {
 	//Clean inventory widgets.
 	for (auto item_widget : InventoryItemWidgets) {
-		//TODO item_widget->SetIsSlotHasItem(false);
+		item_widget->SetIsSlotHasItem(false);
 		FItem Item;
 		Item.ItemName = FText::GetEmpty();
 		Item.ItemType = EItemType::NONE;
-		//TODO Item.Image 
+		//TODO Item.Image // Set item to default image.
 		Item.Quantity = 0;
 		Item.bCombinable = false;
 		Item.SlotIndex = -1;	
-		//TODO item_widget->SetItem(Item);
+		item_widget->SetItemInfo(Item);
 	}
 
 	if (!ensure(InventoryComponent != NULL)) return;
@@ -87,8 +89,8 @@ void UInventoryWidget::RefreshInventory() {
 
 	for (FItem inventory_item : CurrentInventoryItems) {
 		UItemWidget* Item_widget = InventoryItemWidgets[inventory_item.SlotIndex];
-		//TODO Item_widget->SetItem(inventory_item);
-		//TODO Item_widget->SetIsSlotHasItem(true);
+		Item_widget->SetItemInfo(inventory_item);
+		Item_widget->SetIsSlotHasItem(true);
 	}
 
 }
