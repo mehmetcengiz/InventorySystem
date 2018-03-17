@@ -81,7 +81,7 @@ void UInventoryWidget::RefreshInventory() {
 		Item.Quantity = 0;
 		Item.bCombinable = false;
 		Item.SlotIndex = -1;	
-		item_widget->SetItemInfo(Item);
+		item_widget->SetItem(Item);
 	}
 
 	if (!ensure(InventoryComponent != NULL)) return;
@@ -89,7 +89,7 @@ void UInventoryWidget::RefreshInventory() {
 
 	for (FItem inventory_item : CurrentInventoryItems) {
 		UItemWidget* Item_widget = InventoryItemWidgets[inventory_item.SlotIndex];
-		Item_widget->SetItemInfo(inventory_item);
+		Item_widget->SetItem(inventory_item);
 		Item_widget->SetIsSlotHasItem(true);
 	}
 

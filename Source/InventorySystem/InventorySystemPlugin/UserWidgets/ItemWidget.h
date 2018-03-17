@@ -4,6 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "Components/Image.h"
+#include "Components/TextBlock.h"
 
 #include "InventorySystemPlugin/Item.h"
 
@@ -22,14 +24,11 @@ class INVENTORYSYSTEM_API UItemWidget : public UUserWidget
 	
 public:
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
-	void SetImage(UTexture2D* ImgToSet) { ImgItem = ImgToSet; }
+	void SetItem(FItem ItemInfoToSet);
 
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
-	void SetQuantity(FText QuantityToSet) { TxtQuantity = QuantityToSet; }
-
-	UFUNCTION(BlueprintCallable, Category = "Item Setters")
-	void SetItemInfo(FItem ItemInfoToSet) { ItemInfo = ItemInfoToSet; }
-
+	void SetQuantity(FText QuantityToSet) { TxtQuantity->SetText(QuantityToSet); }
+	
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
 	void SetSlotIndex(int32 SlotIndexToSet) { SlotIndex = SlotIndexToSet; }
 	
@@ -40,11 +39,12 @@ public:
 	void SetInventoryWidgetRef(UInventoryWidget* InventoryWidgetRefToSet) { InventoryWidgetRef = InventoryWidgetRefToSet; }
 
 protected:
-	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
-	UTexture2D* ImgItem;
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
-	FText TxtQuantity;
+	UImage* ImgItem;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	UTextBlock* TxtQuantity;
 	
 	UPROPERTY(BlueprintReadWrite)
 	FItem ItemInfo;
