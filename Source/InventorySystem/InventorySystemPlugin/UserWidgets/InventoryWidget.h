@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "Blueprint/UserWidget.h"
+#include "InventorySystemPlugin/Item.h"
 #include "InventoryWidget.generated.h"
 
 struct FItem;
@@ -17,6 +18,14 @@ class INVENTORYSYSTEM_API UInventoryWidget : public UUserWidget
 	
 public:
 	UInventoryWidget(const FObjectInitializer& ObjectInitializer);
+
+
+
+	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
+
+	UFUNCTION(BlueprintCallable, Category = "DragDrop")
+	void ChangeItemSlot(FItem Item, int32 Index);
 
 protected:
 	virtual bool Initialize() override;
@@ -45,6 +54,4 @@ private:
 	void GetCharacterInventoryComponentRef();
 	void CreateItemSlots();
 	void RefreshInventory();
-	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
-	void ChangeItemSlot(FItem Item, int32 Index);
 };
