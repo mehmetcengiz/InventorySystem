@@ -15,7 +15,7 @@
 
 
 UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer) : Super(ObjectInitializer) {
-	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_ItemCpp"));
+	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_Item"));
 	if (!ensure(InventoryItemBPClass.Class != nullptr)) return;
 	InventoryItemClass = InventoryItemBPClass.Class;
 
