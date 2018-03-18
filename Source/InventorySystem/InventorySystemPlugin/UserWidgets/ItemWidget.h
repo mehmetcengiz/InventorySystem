@@ -25,6 +25,12 @@ class INVENTORYSYSTEM_API UItemWidget : public UUserWidget
 public:
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
 	void SetItem(FItem ItemInfoToSet);
+	
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")//TODO Merge with SetStyleDefault function
+	void SetItemStyleAsDragged();
+
+	UFUNCTION(BlueprintCallable, Category = "Item Setters")//TODO Merge with SetStyleDragged function
+	void SetItemStyleAsDefault();
 
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
 	void SetQuantity(FText QuantityToSet) { TxtQuantity->SetText(QuantityToSet); }
@@ -57,5 +63,11 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	UInventoryWidget* InventoryWidgetRef;
+
+	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
+	FLinearColor DraggedColour = FLinearColor(0.026042, 0.026042, 0.026042, 0.729);
+
+	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
+	FLinearColor DefaultColour = FLinearColor(0.026042, 0.026042, 0.026042, 0);
 	
 };

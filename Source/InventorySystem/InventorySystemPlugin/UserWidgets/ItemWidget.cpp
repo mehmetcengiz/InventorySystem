@@ -18,5 +18,20 @@ void UItemWidget::SetItem(FItem ItemInfoToSet) {
 
 	//Set Image Style
 	ImgItem->Brush.SetResourceObject(ItemInfo.Image);
+}
 
+void UItemWidget::SetItemStyleAsDragged() {
+	FSlateBrush slateBrush = ImgItem->Brush;	
+	FSlateColor newTintColor = FSlateColor(DraggedColour);
+	slateBrush.TintColor = newTintColor;
+
+	ImgItem->SetBrush(slateBrush);
+}
+
+void UItemWidget::SetItemStyleAsDefault() {
+	FSlateBrush slateBrush = ImgItem->Brush;
+	FSlateColor newTintColor = FSlateColor(DefaultColour);
+	slateBrush.TintColor = newTintColor;
+
+	ImgItem->SetBrush(slateBrush);
 }
