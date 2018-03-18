@@ -15,7 +15,7 @@
 
 
 UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer) : Super(ObjectInitializer) {
-	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_Item"));
+	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_ItemCpp"));
 	if (!ensure(InventoryItemBPClass.Class != nullptr)) return;
 	InventoryItemClass = InventoryItemBPClass.Class;
 
@@ -88,6 +88,7 @@ void UInventoryWidget::RefreshInventory() {
 	TArray<FItem> CurrentInventoryItems = InventoryComponent->GetInventoryItems();
 
 	for (FItem inventory_item : CurrentInventoryItems) {
+		if (InventoryItemWidgets.Num() <= 0) { return; }
 		UItemWidget* Item_widget = InventoryItemWidgets[inventory_item.SlotIndex];
 		Item_widget->SetItem(inventory_item);
 		Item_widget->SetIsSlotHasItem(true);
