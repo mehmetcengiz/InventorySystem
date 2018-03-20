@@ -91,8 +91,11 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 	ItemToSplit.Quantity -= SplitQuantity;
 
 	//Add items back.
-	InventoryItems.Add(SplitedItem);
-	InventoryItems.Add(ItemToSplit);
+	
+
+	if(SplitedItem.Quantity >=0)	InventoryItems.Add(SplitedItem);
+	if (ItemToSplit.Quantity >= 0)	InventoryItems.Add(ItemToSplit);
+	
 }
 
 

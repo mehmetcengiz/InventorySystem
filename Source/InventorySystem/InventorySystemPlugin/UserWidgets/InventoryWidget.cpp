@@ -102,9 +102,15 @@ void UInventoryWidget::SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo) {
 	RefreshInventory();
 }
 
-void UInventoryWidget::ChangeItemSlot(FItem Item, int32 Index) {
+void UInventoryWidget::ChangeItemSlot(FItem Item, int32 NewSlot) {
 	if (!ensure(InventoryComponent != NULL)) return;
-	InventoryComponent->SetItemSlot(Item, Index);
+	InventoryComponent->SetItemSlot(Item, NewSlot);
+	RefreshInventory();
+}
+
+void UInventoryWidget::SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot) {
+	if (!ensure(InventoryComponent != NULL)) return;
+	InventoryComponent->SplitItem(Item, SplitQuantity, NewSlot);
 	RefreshInventory();
 }
 

@@ -25,7 +25,13 @@ public:
 	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
 
 	UFUNCTION(BlueprintCallable, Category = "DragDrop")
-	void ChangeItemSlot(FItem Item, int32 Index);
+	void ChangeItemSlot(FItem Item, int32 NewSlot);
+
+	UFUNCTION(BlueprintCallable, Category = "DragDrop")
+	void SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot);
+	
+	UFUNCTION(BlueprintCallable, Category = "Inventory Functionality")
+	void SetSplitFunctionalityEnabled(bool BoolToSet) { bIsSplitFunctionalityEnabled = BoolToSet; }
 
 protected:
 	virtual bool Initialize() override;
@@ -47,8 +53,11 @@ protected:
 	UPROPERTY(meta = (BindWidget) , BlueprintReadWrite)
 	class UWrapBox* WBoxInventory;
 	
-	UPROPERTY(EditDefaultsOnly, Category = "Inventory Stlye")
+	UPROPERTY(EditDefaultsOnly, Category = "Inventory Style")
 	UTexture2D* DefaultImage;
+	
+	UPROPERTY(BlueprintReadWrite, Category = "Inventory Functionality")
+	bool bIsSplitFunctionalityEnabled;
 
 private:
 	void GetCharacterInventoryComponentRef();
