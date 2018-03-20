@@ -33,8 +33,11 @@ protected:
 	UPROPERTY(EditAnywhere,Category = "Inventory Items")
 	TArray<FItem> InventoryItems;
 
-	UPROPERTY(EditAnywhere, Category = "Inventory Items")
+	UPROPERTY(EditAnywhere, Category = "Inventory Options")
 	int32 InventorySize = 20;
+
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Inventory Options")
+	int32 MaxItemCountPerSlot = 9999;
 
 public:
 	
@@ -46,4 +49,8 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
 	void SplitItem(FItem ItemToSplit, int32 SplitQuantity, int32 NewSlot);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	void CombineItems(FItem ItemA, FItem ItemB);
+
 };

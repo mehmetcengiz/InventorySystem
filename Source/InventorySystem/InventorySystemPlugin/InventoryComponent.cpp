@@ -98,4 +98,12 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 	
 }
 
+void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
+	if (!(ItemA.ItemName.EqualTo(ItemB.ItemName))) return;
+	if (!ItemA.bCombinable && !ItemB.bCombinable) return;
+
+	//if((ItemA.Quantity + ItemB.Quantity) >)
+
+}
+
 

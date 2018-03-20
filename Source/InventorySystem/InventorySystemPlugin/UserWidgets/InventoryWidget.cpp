@@ -114,6 +114,7 @@ void UInventoryWidget::SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot)
 	RefreshInventory();
 }
 
+
 void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
 	
 }
