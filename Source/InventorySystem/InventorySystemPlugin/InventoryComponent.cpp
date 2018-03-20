@@ -28,7 +28,6 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	// ...
 }
 
-
 void UInventoryComponent::SwapItemSlots(FItem DraggedItem, FItem DroppedTo) {
 	//Delete current items.
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
@@ -68,3 +67,32 @@ void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
 	//Add item back.
 	InventoryItems.Add(Item);
 }
+
+void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int32 NewSlot) {
+	
+	//Conditions to NOT SPLIT
+	if(!ItemToSplit.bCombinable) return;
+	if(SplitQuantity <= 0 ) return;
+	for (int32 i = 0; i < InventoryItems.Num(); i++) {
+		if(InventoryItems[i].SlotIndex == NewSlot) return;
+	}
+
+	//Delete Splited Item.
+	for(int32 i = 0; i<InventoryItems.Num(); i++) {
+		if(InventoryItems[i].SlotIndex == ItemToSplit.SlotIndex) {
+			InventoryItems.RemoveAt(i);
+		}
+	}
+	
+	//Split item to new two Item.
+	FItem SplitedItem = ItemToSplit;
+	SplitedItem.Quantity = SplitQuantity;
+	SplitedItem.SlotIndex = NewSlot;
+	ItemToSplit.Quantity -= SplitQuantity;
+
+	//Add items back.
+	InventoryItems.Add(SplitedItem);
+	InventoryItems.Add(ItemToSplit);
+}
+
+

@@ -43,4 +43,7 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
 	void SetItemSlot(FItem Item, int32 NewSlot);
+	
+	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	void SplitItem(FItem ItemToSplit, int32 SplitQuantity, int32 NewSlot);
 };
