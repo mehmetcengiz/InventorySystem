@@ -34,10 +34,12 @@ void UInventoryComponent::SwapItemSlots(FItem DraggedItem, FItem DroppedTo) {
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
 		if(InventoryItems[i].SlotIndex == DraggedItem.SlotIndex) {
 			InventoryItems.RemoveAt(i);
-		}
-		if(InventoryItems[i].SlotIndex == DroppedTo.SlotIndex) {
+			i--;
+		}else if (InventoryItems[i].SlotIndex == DroppedTo.SlotIndex) {
 			InventoryItems.RemoveAt(i);
+			i--;
 		}
+		
 	}
 
 	//Swap item slot.
@@ -56,6 +58,7 @@ void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
 		if (InventoryItems[i].SlotIndex == Item.SlotIndex) {
 			InventoryItems.RemoveAt(i);
+			break;
 		}
 	}
 
