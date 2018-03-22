@@ -24,6 +24,9 @@ public:
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
 	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
 
+	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	void CombineItems(FItem DraggedItem, FItem DroppedTo);
+
 	UFUNCTION(BlueprintCallable, Category = "DragDrop")
 	void ChangeItemSlot(FItem Item, int32 NewSlot);
 

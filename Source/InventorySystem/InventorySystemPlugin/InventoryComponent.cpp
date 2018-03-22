@@ -53,6 +53,11 @@ void UInventoryComponent::SwapItemSlots(FItem DraggedItem, FItem DroppedTo) {
 }
 
 void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
+	//Conditions to NOT SET.
+	for (int32 i = 0; i < InventoryItems.Num(); i++) {
+		if (InventoryItems[i].SlotIndex == NewSlot) { return; }
+	}
+
 	//Delete current item.
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
 		if (InventoryItems[i].SlotIndex == Item.SlotIndex) {
@@ -99,10 +104,31 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 }
 
 void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
+	//Conditions to NOT COMBINE.
 	if (!(ItemA.ItemName.EqualTo(ItemB.ItemName))) return;
 	if (!ItemA.bCombinable && !ItemB.bCombinable) return;
 
-	//if((ItemA.Quantity + ItemB.Quantity) >)
+	//Delete Combined Items
+	for (int32 i = 0; i<InventoryItems.Num(); i++) {
+		if (InventoryItems[i].SlotIndex == ItemA.SlotIndex) {
+			InventoryItems.RemoveAt(i);
+			i--;
+		}else if(InventoryItems[i].SlotIndex == ItemB.SlotIndex) {
+			InventoryItems.RemoveAt(i);
+			i--;
+		}
+	}
+
+	//Combine and Add items back.
+	if((ItemA.Quantity + ItemB.Quantity) <= MaxItemCountPerSlot) {
+		ItemA.Quantity += ItemB.Quantity;
+		InventoryItems.Add(ItemA);
+	}else {
+		ItemB.Quantity = ((ItemB.Quantity + ItemA.Quantity) - MaxItemCountPerSlot);
+		ItemA.Quantity = MaxItemCountPerSlot;
+		InventoryItems.Add(ItemA);
+		InventoryItems.Add(ItemB);
+	}
 
 }
 

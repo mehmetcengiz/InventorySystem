@@ -102,6 +102,12 @@ void UInventoryWidget::SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo) {
 	RefreshInventory();
 }
 
+void UInventoryWidget::CombineItems(FItem DraggedItem, FItem DroppedTo) {
+	if (!ensure(InventoryComponent != NULL)) return;
+	InventoryComponent->CombineItems(DraggedItem, DroppedTo);
+	RefreshInventory();
+}
+
 void UInventoryWidget::ChangeItemSlot(FItem Item, int32 NewSlot) {
 	if (!ensure(InventoryComponent != NULL)) return;
 	InventoryComponent->SetItemSlot(Item, NewSlot);
