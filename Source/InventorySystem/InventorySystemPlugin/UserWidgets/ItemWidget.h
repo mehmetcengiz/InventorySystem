@@ -62,6 +62,9 @@ protected:
 	bool bIsSlotHasItem;
 
 	UPROPERTY(BlueprintReadWrite)
+	bool bIsDragging;
+
+	UPROPERTY(BlueprintReadWrite)
 	UInventoryWidget* InventoryWidgetRef;
 
 	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
