@@ -36,6 +36,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory Functionality")
 	void SetSplitFunctionalityEnabled(bool BoolToSet) { bIsSplitFunctionalityEnabled = BoolToSet; }
 
+	UFUNCTION(BlueprintCallable,Category = "Inventory Functionality")
+	bool GetSplitFunctinalityEnabled() { return bIsSplitFunctionalityEnabled; }
+
 protected:
 	virtual bool Initialize() override;
 	virtual void NativeConstruct() override;

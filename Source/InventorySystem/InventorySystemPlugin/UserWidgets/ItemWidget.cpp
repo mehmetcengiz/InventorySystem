@@ -4,6 +4,7 @@
 
 #include "Styling/SlateBrush.h"
 
+#include "InventoryWidget.h"
 
 void UItemWidget::SetItem(FItem ItemInfoToSet) {
 	//Set Item Info
@@ -34,4 +35,28 @@ void UItemWidget::SetItemStyleAsDefault() {
 	slateBrush.TintColor = newTintColor;
 
 	ImgItem->SetBrush(slateBrush);
+}
+
+void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
+	if (SlotIndex == DroppedItem->ItemInfo.SlotIndex) {	return;	}
+
+	DroppedItem->bIsItemDragging = false;
+
+	if(bIsSlotHasItem) {
+		if(ItemInfo.ItemName.EqualTo(DroppedItem->ItemInfo.ItemName)) {
+			//Combine
+			InventoryWidgetRef->CombineItems(ItemInfo, DroppedItem->ItemInfo);
+		}else {
+			//Swap
+			InventoryWidgetRef->SwapItemsBySlot(DroppedItem->ItemInfo, ItemInfo);
+		}
+	}else {
+		if(InventoryWidgetRef->GetSplitFunctinalityEnabled()) {
+			//Split Item
+			InventoryWidgetRef->SplitItem(DroppedItem->ItemInfo, DroppedItem->ItemInfo.Quantity / 2, SlotIndex);
+		}else {
+			//Change Item Slot
+			InventoryWidgetRef->ChangeItemSlot(DroppedItem->ItemInfo, SlotIndex);
+		}
+	}
 }

@@ -62,7 +62,7 @@ protected:
 	bool bIsSlotHasItem;
 
 	UPROPERTY(BlueprintReadWrite)
-	bool bIsDragging;
+	bool bIsItemDragging;
 
 	UPROPERTY(BlueprintReadWrite)
 	UInventoryWidget* InventoryWidgetRef;
@@ -72,5 +72,8 @@ protected:
 
 	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
 	FLinearColor DefaultColour = FLinearColor(0.026042, 0.026042, 0.026042, 0);
+
+	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	void OnItemDrop(UItemWidget* DroppedItem);
 	
 };
