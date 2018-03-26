@@ -4,6 +4,8 @@
 
 #include "Styling/SlateBrush.h"
 
+
+#include "QuantitySpliterWidget.h"
 #include "InventoryWidget.h"
 
 void UItemWidget::SetItem(FItem ItemInfoToSet) {
@@ -48,15 +50,30 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 			InventoryWidgetRef->CombineItems(ItemInfo, DroppedItem->ItemInfo);
 		}else {
 			//Swap
+			OpenSplitItemPanel(DroppedItem);
 			InventoryWidgetRef->SwapItemsBySlot(DroppedItem->ItemInfo, ItemInfo);
 		}
 	}else {
 		if(InventoryWidgetRef->GetSplitFunctinalityEnabled()) {
-			//Split Item
-			InventoryWidgetRef->SplitItem(DroppedItem->ItemInfo, DroppedItem->ItemInfo.Quantity / 2, SlotIndex);
+			//Open split Item
+			OpenSplitItemPanel(DroppedItem);
 		}else {
 			//Change Item Slot
 			InventoryWidgetRef->ChangeItemSlot(DroppedItem->ItemInfo, SlotIndex);
 		}
 	}
 }
+
+void UItemWidget::OpenSplitItemPanel(UItemWidget* DroppedItem) {
+	UWorld* World = GetWorld();
+	if (!ensure(World != NULL)) return;
+	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
+	if (!ensure(PlayerController != NULL)) return;
+	
+	Spliter = CreateWidget<UQuantitySpliterWidget>(PlayerController, UQuantitySpliterWidget::StaticClass());
+	if (!ensure(Spliter != NULL)) return;	
+	Spliter->InitializeSpliter(InventoryWidgetRef, DroppedItem->ItemInfo,SlotIndex);
+	Spliter->AddToViewport(1);
+	
+}
+

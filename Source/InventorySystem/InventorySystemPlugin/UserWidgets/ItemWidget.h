@@ -9,10 +9,10 @@
 
 #include "InventorySystemPlugin/Item.h"
 
-
 #include "ItemWidget.generated.h"
 
 class UInventoryWidget;
+class UQuantitySpliterWidget;
 
 /**
  * 
@@ -66,6 +66,9 @@ protected:
 
 	UPROPERTY(BlueprintReadWrite)
 	UInventoryWidget* InventoryWidgetRef;
+	
+	UPROPERTY(BlueprintReadWrite)
+	UQuantitySpliterWidget* Spliter;
 
 	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
 	FLinearColor DraggedColour = FLinearColor(0.026042, 0.026042, 0.026042, 0.729);
@@ -75,5 +78,8 @@ protected:
 
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
 	void OnItemDrop(UItemWidget* DroppedItem);
+	
+	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	void OpenSplitItemPanel(UItemWidget* DroppedItem);
 	
 };
