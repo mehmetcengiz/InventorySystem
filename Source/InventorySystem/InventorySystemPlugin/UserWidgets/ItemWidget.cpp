@@ -3,10 +3,28 @@
 #include "ItemWidget.h"
 
 #include "Styling/SlateBrush.h"
-
+#include "UObject/ConstructorHelpers.h"
 
 #include "QuantitySpliterWidget.h"
 #include "InventoryWidget.h"
+
+UItemWidget::UItemWidget(const FObjectInitializer& ObjectInitializer): UUserWidget(ObjectInitializer){
+	ConstructorHelpers::FClassFinder<UUserWidget> QuantitySpliterBP(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_QuantitySpliter"));
+	if (!ensure(QuantitySpliterBP.Class != nullptr)) return;
+
+	QuantitySpliterClass = QuantitySpliterBP.Class;
+}
+
+bool UItemWidget::Initialize() {
+	bool Success = Super::Initialize();
+	if (!Success) { return false; }
+
+	return true;
+}
+
+void UItemWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
+	Super::OnLevelRemovedFromWorld(InLevel, InWorld);
+}
 
 void UItemWidget::SetItem(FItem ItemInfoToSet) {
 	//Set Item Info
@@ -67,10 +85,8 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 void UItemWidget::OpenSplitItemPanel(UItemWidget* DroppedItem) {
 	UWorld* World = GetWorld();
 	if (!ensure(World != NULL)) return;
-	APlayerController* PlayerController = GetWorld()->GetFirstPlayerController();
-	if (!ensure(PlayerController != NULL)) return;
 	
-	Spliter = CreateWidget<UQuantitySpliterWidget>(PlayerController, UQuantitySpliterWidget::StaticClass());
+	Spliter = CreateWidget<UQuantitySpliterWidget>(World, QuantitySpliterClass);
 	if (!ensure(Spliter != NULL)) return;	
 	Spliter->InitializeSpliter(InventoryWidgetRef, DroppedItem->ItemInfo,SlotIndex);
 	Spliter->AddToViewport(1);

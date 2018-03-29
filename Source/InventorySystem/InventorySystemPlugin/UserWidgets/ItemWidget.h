@@ -23,6 +23,12 @@ class INVENTORYSYSTEM_API UItemWidget : public UUserWidget
 	GENERATED_BODY()
 	
 public:
+	UItemWidget(const FObjectInitializer & ObjectInitializer);
+protected:
+	virtual bool Initialize() override;
+	void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
+public:
+
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
 	void SetItem(FItem ItemInfoToSet);
 	
@@ -81,5 +87,6 @@ protected:
 	
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
 	void OpenSplitItemPanel(UItemWidget* DroppedItem);
-	
+private:
+	TSubclassOf<class UUserWidget> QuantitySpliterClass;
 };
