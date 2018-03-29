@@ -26,11 +26,18 @@ void UQuantitySpliterWidget::InitializeSpliter(UInventoryWidget* InventoryWidget
 }
 
 void UQuantitySpliterWidget::ConfirmQuantitySplit() {
-	UE_LOG(LogTemp, Warning, TEXT("ConfirmQuantitySplit !!!!"));
+	
 	FString newQuantatiyString = SplitQuantity->GetText().ToString();
+
+	while(newQuantatiyString.Contains(",")) {
+		int32 index = newQuantatiyString.Find(",");
+		newQuantatiyString.RemoveAt(index);
+	}
+
 	int32 newQuantatiy = FCString::Atoi(*newQuantatiyString);
 	
 	if (!ensure(InventoryWidgetRef != NULL)) return;
 	InventoryWidgetRef->SplitItem(CurrentItemInfo, newQuantatiy, DropItemSlot);
 	
+	RemoveFromParent();
 }

@@ -10,6 +10,7 @@
 
 #include "QuantitySpliterWidget.generated.h"
 
+
 /**
  * 
  */
@@ -34,6 +35,7 @@ protected:
 	class UButton* BtnSplitAccept;
 	
 private:
+	UFUNCTION()
 	void ConfirmQuantitySplit();
 	
 	UPROPERTY()
