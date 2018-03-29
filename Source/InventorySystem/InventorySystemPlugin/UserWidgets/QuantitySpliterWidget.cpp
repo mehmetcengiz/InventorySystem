@@ -13,7 +13,10 @@ bool UQuantitySpliterWidget::Initialize() {
 	if (!Succes) { return false; }
 
 	if (!ensure(BtnSplitAccept != NULL)) return false;
+	if (!ensure(SplitQuantity != NULL)) return false;
+
 	BtnSplitAccept->OnClicked.AddDynamic(this, &UQuantitySpliterWidget::ConfirmQuantitySplit);
+	SplitQuantity->OnTextChanged.AddDynamic(this, &UQuantitySpliterWidget::OnTextUpdated);
 
 	return true;
 }
@@ -40,4 +43,10 @@ void UQuantitySpliterWidget::ConfirmQuantitySplit() {
 	InventoryWidgetRef->SplitItem(CurrentItemInfo, newQuantatiy, DropItemSlot);
 	
 	RemoveFromParent();
+}
+
+void UQuantitySpliterWidget::OnTextUpdated(const FText& Text) {
+	//TODO implement function from BP.
+
+
 }

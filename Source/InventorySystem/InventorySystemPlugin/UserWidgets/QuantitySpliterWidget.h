@@ -34,15 +34,18 @@ protected:
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UButton* BtnSplitAccept;
 	
+	UPROPERTY(BlueprintReadWrite)
+	FItem CurrentItemInfo;
+	
 private:
 	UFUNCTION()
 	void ConfirmQuantitySplit();
+
+	UFUNCTION()
+	void OnTextUpdated(const FText& Text);
 	
 	UPROPERTY()
 	class UInventoryWidget* InventoryWidgetRef;
-
-	UPROPERTY()
-	FItem CurrentItemInfo;
 
 	UPROPERTY()
 	int32 DropItemSlot;
