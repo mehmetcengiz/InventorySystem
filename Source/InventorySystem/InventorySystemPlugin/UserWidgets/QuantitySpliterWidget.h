@@ -36,10 +36,11 @@ protected:
 	
 	UPROPERTY(BlueprintReadWrite)
 	FItem CurrentItemInfo;
+
+	UFUNCTION(BlueprintCallable)
+	void ConfirmQuantitySplit();
 	
 private:
-	UFUNCTION()
-	void ConfirmQuantitySplit();
 
 	UFUNCTION()
 	void OnTextUpdated(const FText& Text);
