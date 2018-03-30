@@ -22,7 +22,7 @@ bool UQuantitySpliterWidget::Initialize() {
 }
 
 void UQuantitySpliterWidget::InitializeSpliter(UInventoryWidget* InventoryWidgetRefToSet, const FItem ItemInfo, const int32 DroppedSlotIndex) {
-	SplitQuantity->SetText(FText::AsNumber(ItemInfo.Quantity/2));
+	SplitQuantity->SetText(FText::FromString(FString::FromInt(ItemInfo.Quantity / 2)));
 	InventoryWidgetRef = InventoryWidgetRefToSet;
 	CurrentItemInfo = ItemInfo;
 	DropItemSlot = DroppedSlotIndex;

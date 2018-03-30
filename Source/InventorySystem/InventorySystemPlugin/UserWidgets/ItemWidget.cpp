@@ -32,7 +32,7 @@ void UItemWidget::SetItem(FItem ItemInfoToSet) {
 
 	//Set Quantitiy Text
 	if(ItemInfo.bCombinable) {
-		TxtQuantity->SetText(FText::AsNumber(ItemInfo.Quantity));
+		TxtQuantity->SetText(FText::FromString(FString::FromInt(ItemInfo.Quantity)));
 	}else {
 		TxtQuantity->SetText(FText::GetEmpty());
 	}
