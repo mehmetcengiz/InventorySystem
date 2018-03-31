@@ -26,7 +26,7 @@ public:
 	UItemWidget(const FObjectInitializer & ObjectInitializer);
 protected:
 	virtual bool Initialize() override;
-	void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
+
 public:
 
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")

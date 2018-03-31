@@ -22,10 +22,6 @@ bool UItemWidget::Initialize() {
 	return true;
 }
 
-void UItemWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
-	Super::OnLevelRemovedFromWorld(InLevel, InWorld);
-}
-
 void UItemWidget::SetItem(FItem ItemInfoToSet) {
 	//Set Item Info
 	ItemInfo = ItemInfoToSet;

@@ -41,6 +41,8 @@ void UInventoryWidget::NativeConstruct() {
 	RefreshInventory();
 }
 
+
+
 void UInventoryWidget::GetCharacterInventoryComponentRef() {
 	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
 	if (!ensure(PlayerCharacter != NULL)) return;
@@ -118,9 +120,4 @@ void UInventoryWidget::SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot)
 	if (!ensure(InventoryComponent != NULL)) return;
 	InventoryComponent->SplitItem(Item, SplitQuantity, NewSlot);
 	RefreshInventory();
-}
-
-
-void UInventoryWidget::OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) {
-	
 }

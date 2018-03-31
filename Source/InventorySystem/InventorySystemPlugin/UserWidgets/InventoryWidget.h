@@ -43,8 +43,6 @@ protected:
 	virtual bool Initialize() override;
 	virtual void NativeConstruct() override;
 
-	void OnLevelRemovedFromWorld(ULevel* InLevel, UWorld* InWorld) override;
-
 	TSubclassOf<class UItemWidget> InventoryItemClass;
 
 	UPROPERTY(BlueprintReadWrite, Category = "Inventory Component")
