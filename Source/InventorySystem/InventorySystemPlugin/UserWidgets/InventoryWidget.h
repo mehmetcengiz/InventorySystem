@@ -7,6 +7,7 @@
 #include "InventorySystemPlugin/Item.h"
 #include "InventoryWidget.generated.h"
 
+class UQuantitySpliterWidget;
 struct FItem;
 /**
  * 
@@ -18,7 +19,6 @@ class INVENTORYSYSTEM_API UInventoryWidget : public UUserWidget
 	
 public:
 	UInventoryWidget(const FObjectInitializer& ObjectInitializer);
-
 
 
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
@@ -33,11 +33,18 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "DragDrop")
 	void SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot);
 	
-	UFUNCTION(BlueprintCallable, Category = "Inventory Functionality")
+	/*Getter Setters*/
+	UFUNCTION(BlueprintCallable, Category = "Getter Setter")
 	void SetSplitFunctionalityEnabled(bool BoolToSet) { bIsSplitFunctionalityEnabled = BoolToSet; }
 
-	UFUNCTION(BlueprintCallable,Category = "Inventory Functionality")
-	bool GetSplitFunctinalityEnabled() { return bIsSplitFunctionalityEnabled; }
+	UFUNCTION(BlueprintCallable,Category = "Getter Setter")
+	bool GetSplitFunctinalityEnabled() const { return bIsSplitFunctionalityEnabled; }
+
+	UFUNCTION(BlueprintCallable, Category = "Getter Setter")
+	void SetItemSpliter(UQuantitySpliterWidget* SpliterRef) { Spliter = SpliterRef; }
+
+	UFUNCTION(BlueprintCallable,Category = "Getter Setter")
+	UQuantitySpliterWidget* GetQuantitySpliterWidget() const { return Spliter; }
 
 protected:
 	virtual bool Initialize() override;
@@ -63,8 +70,15 @@ protected:
 	UPROPERTY(BlueprintReadWrite, Category = "Inventory Functionality")
 	bool bIsSplitFunctionalityEnabled;
 
+	UPROPERTY(BlueprintReadWrite)
+	UQuantitySpliterWidget* Spliter;
+
+	TSubclassOf<class UUserWidget> QuantitySpliterClass;
+
 private:
 	void GetCharacterInventoryComponentRef();
+	void CreateItemSpliter();
 	void CreateItemSlots();
 	void RefreshInventory();
+
 };

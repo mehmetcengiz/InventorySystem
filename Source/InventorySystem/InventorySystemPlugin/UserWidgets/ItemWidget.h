@@ -22,8 +22,6 @@ class INVENTORYSYSTEM_API UItemWidget : public UUserWidget
 {
 	GENERATED_BODY()
 	
-public:
-	UItemWidget(const FObjectInitializer & ObjectInitializer);
 protected:
 	virtual bool Initialize() override;
 
@@ -56,7 +54,7 @@ protected:
 	UImage* ImgItem;
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
-	UTextBlock* TxtQuantity;
+	UTextBlock* TxtQuantity = nullptr;
 	
 	UPROPERTY(BlueprintReadWrite)
 	FItem ItemInfo;
@@ -65,7 +63,7 @@ protected:
 	int32 SlotIndex;
 
 	UPROPERTY(BlueprintReadWrite)
-	bool bIsSlotHasItem;
+	bool bIsSlotHasItem;	
 
 	UPROPERTY(BlueprintReadWrite)
 	bool bIsItemDragging;
@@ -74,7 +72,7 @@ protected:
 	UInventoryWidget* InventoryWidgetRef;
 	
 	UPROPERTY(BlueprintReadWrite)
-	UQuantitySpliterWidget* Spliter;
+	UQuantitySpliterWidget* Spliter = nullptr;
 
 	UPROPERTY(EditDefaultsOnly, Category = "DragDrop")
 	FLinearColor DraggedColour = FLinearColor(0.026042, 0.026042, 0.026042, 0.729);
@@ -87,6 +85,4 @@ protected:
 	
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
 	void OpenSplitItemPanel(UItemWidget* DroppedItem);
-private:
-	TSubclassOf<class UUserWidget> QuantitySpliterClass;
 };

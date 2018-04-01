@@ -8,13 +8,6 @@
 #include "QuantitySpliterWidget.h"
 #include "InventoryWidget.h"
 
-UItemWidget::UItemWidget(const FObjectInitializer& ObjectInitializer): UUserWidget(ObjectInitializer){
-	ConstructorHelpers::FClassFinder<UUserWidget> QuantitySpliterBP(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_QuantitySpliter"));
-	if (!ensure(QuantitySpliterBP.Class != nullptr)) return;
-
-	QuantitySpliterClass = QuantitySpliterBP.Class;
-}
-
 bool UItemWidget::Initialize() {
 	bool Success = Super::Initialize();
 	if (!Success) { return false; }
@@ -78,13 +71,11 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 }
 
 void UItemWidget::OpenSplitItemPanel(UItemWidget* DroppedItem) {
-	UWorld* World = GetWorld();
-	if (!ensure(World != NULL)) return;
-	
-	Spliter = CreateWidget<UQuantitySpliterWidget>(World, QuantitySpliterClass);
+		
+	Spliter = InventoryWidgetRef->GetQuantitySpliterWidget();
 	if (!ensure(Spliter != NULL)) return;	
+
 	Spliter->InitializeSpliter(InventoryWidgetRef, DroppedItem->ItemInfo,SlotIndex);
 	Spliter->AddToViewport(1);
-	
 }
 

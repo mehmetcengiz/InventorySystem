@@ -12,14 +12,17 @@
 #include "ItemWidget.h"
 #include "InventorySystemPlugin/InventoryComponent.h"
 #include "InventorySystemPlugin/Item.h"
+#include "QuantitySpliterWidget.h"
 
 
 UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer) : Super(ObjectInitializer) {
 	ConstructorHelpers::FClassFinder<UUserWidget> InventoryItemBPClass(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_Item"));
 	if (!ensure(InventoryItemBPClass.Class != nullptr)) return;
 	InventoryItemClass = InventoryItemBPClass.Class;
-
-
+	
+	ConstructorHelpers::FClassFinder<UUserWidget> QuantitySpliterBP(TEXT("/Game/InventorySystem/MIKUI/SubWidgets/Inventory/WBP_QuantitySpliter"));
+	if (!ensure(QuantitySpliterBP.Class != nullptr)) return;
+	QuantitySpliterClass = QuantitySpliterBP.Class;
 }
 
 bool UInventoryWidget::Initialize() {
@@ -36,12 +39,12 @@ bool UInventoryWidget::Initialize() {
 }
 
 void UInventoryWidget::NativeConstruct() {
+	Super::NativeConstruct();
 	GetCharacterInventoryComponentRef();
+	CreateItemSpliter();
 	CreateItemSlots();
 	RefreshInventory();
 }
-
-
 
 void UInventoryWidget::GetCharacterInventoryComponentRef() {
 	ACharacter* PlayerCharacter = UGameplayStatics::GetPlayerCharacter(GetWorld(), 0);
@@ -50,6 +53,12 @@ void UInventoryWidget::GetCharacterInventoryComponentRef() {
 	InventoryComponent = PlayerCharacter->FindComponentByClass<UInventoryComponent>();
 	if (!ensure(InventoryComponent != NULL)) return;
 
+}
+
+void UInventoryWidget::CreateItemSpliter() {
+	UWorld* World = GetWorld();
+	if (!ensure(World != NULL)) return;
+	Spliter = CreateWidget<UQuantitySpliterWidget>(World, QuantitySpliterClass);
 }
 
 void UInventoryWidget::CreateItemSlots() {
