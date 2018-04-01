@@ -49,7 +49,7 @@ public:
 	
 	UFUNCTION(BlueprintCallable, Category = "Item Setters")
 	void SetInventoryWidgetRef(UInventoryWidget* InventoryWidgetRefToSet) { InventoryWidgetRef = InventoryWidgetRefToSet; }
-
+	
 protected:
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)

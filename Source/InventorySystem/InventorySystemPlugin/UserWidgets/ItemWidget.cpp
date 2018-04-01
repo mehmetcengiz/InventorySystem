@@ -64,7 +64,6 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 			InventoryWidgetRef->CombineItems(ItemInfo, DroppedItem->ItemInfo);
 		}else {
 			//Swap
-			OpenSplitItemPanel(DroppedItem);
 			InventoryWidgetRef->SwapItemsBySlot(DroppedItem->ItemInfo, ItemInfo);
 		}
 	}else {
