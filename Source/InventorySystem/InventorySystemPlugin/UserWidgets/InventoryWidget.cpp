@@ -27,7 +27,7 @@ UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer)
 
 bool UInventoryWidget::Initialize() {
 	bool Success = Super::Initialize();
-	if (!ensure(Success != NULL)) return false;
+	if (!Success) return false;
 
 	if (!ensure(BtnTrash != NULL)) return false;
 	if (!ensure(WBoxInventory != NULL)) return false;

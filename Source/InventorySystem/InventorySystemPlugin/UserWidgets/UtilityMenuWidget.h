@@ -17,6 +17,8 @@ public:
 	UUtilityMenuWidget(const FObjectInitializer& ObjectInitializer);
 	
 protected:
+	virtual bool Initialize() override;
+
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UButton* BtnBestiary;
 
@@ -41,10 +43,26 @@ protected:
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UWidgetSwitcher* UtilityPageSwitcher;
 
+	UFUNCTION(BlueprintCallable,Category="Menu Selectors")
+	void BtnBestiaryOnClicked();
 
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnCraftingOnClicked();
 
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnInventoryOnClicked();
 
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnMainMenuOnClicked();
+	
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnMapOnClicked();
 
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnOptionsOnClicked();
+
+	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
+	void BtnQuestOnClicked();
 
 	
 };
