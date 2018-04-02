@@ -19,6 +19,7 @@ public:
 protected:
 	virtual bool Initialize() override;
 
+	/*Widget Variables.*/
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UButton* BtnBestiary;
 
@@ -84,7 +85,9 @@ protected:
 
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UUserWidget* WBP_Quests;
+	/*End Widget Variables.*/
 
+	/*Button click events.*/
 	UFUNCTION(BlueprintCallable,Category="Menu Selectors")
 	void BtnBestiaryOnClicked();
 
@@ -105,6 +108,6 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Menu Selectors")
 	void BtnQuestOnClicked();
-
+	/*End Button Click.*/
 	
 };
