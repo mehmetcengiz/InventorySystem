@@ -18,6 +18,8 @@ public:
 	
 protected:
 	virtual bool Initialize() override;
+	
+
 
 	/*Widget Variables.*/
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
