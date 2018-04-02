@@ -4,4 +4,7 @@
 
 
 
+UUtilityMenuWidget::UUtilityMenuWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
+	
+}
 
