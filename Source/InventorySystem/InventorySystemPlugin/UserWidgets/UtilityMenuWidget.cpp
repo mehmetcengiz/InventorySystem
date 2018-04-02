@@ -6,9 +6,21 @@
 #include "Components/WidgetSwitcher.h"
 #include "Components/TextBlock.h"
 
+#include "InventoryWidget.h"
+
 
 UUtilityMenuWidget::UUtilityMenuWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
 	
+}
+
+void UUtilityMenuWidget::RemoveFromParent() {
+	
+	auto InventoryWidget = Cast<UInventoryWidget>(WBP_Inventory);
+	if(InventoryWidget) {
+		InventoryWidget->RemoveFromParent();
+	}
+
+	Super::RemoveFromParent();
 }
 
 bool UUtilityMenuWidget::Initialize() {

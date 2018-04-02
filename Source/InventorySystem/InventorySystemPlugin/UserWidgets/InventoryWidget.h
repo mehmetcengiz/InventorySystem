@@ -20,6 +20,7 @@ class INVENTORYSYSTEM_API UInventoryWidget : public UUserWidget
 public:
 	UInventoryWidget(const FObjectInitializer& ObjectInitializer);
 
+	virtual void RemoveFromParent() override;
 
 	UFUNCTION(BlueprintCallable,Category="DragDrop")
 	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);

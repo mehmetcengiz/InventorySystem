@@ -25,6 +25,13 @@ UInventoryWidget::UInventoryWidget(const FObjectInitializer & ObjectInitializer)
 	QuantitySpliterClass = QuantitySpliterBP.Class;
 }
 
+void UInventoryWidget::RemoveFromParent() {
+	if(Spliter != NULL) {
+		Spliter->RemoveFromParent();
+	}
+	Super::RemoveFromParent();
+}
+
 bool UInventoryWidget::Initialize() {
 	bool Success = Super::Initialize();
 	if (!Success) return false;

@@ -16,11 +16,10 @@ class INVENTORYSYSTEM_API UUtilityMenuWidget : public UUserWidget
 public:
 	UUtilityMenuWidget(const FObjectInitializer& ObjectInitializer);
 	
+	virtual void RemoveFromParent() override;
+
 protected:
 	virtual bool Initialize() override;
-	
-
-
 	/*Widget Variables.*/
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UButton* BtnBestiary;
