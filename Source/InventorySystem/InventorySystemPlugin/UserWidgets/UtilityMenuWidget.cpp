@@ -3,6 +3,8 @@
 #include "UtilityMenuWidget.h"
 
 #include "Components/Button.h"
+#include "Components/WidgetSwitcher.h"
+#include "Components/TextBlock.h"
 
 
 UUtilityMenuWidget::UUtilityMenuWidget(const FObjectInitializer& ObjectInitializer) : Super(ObjectInitializer) {
@@ -33,36 +35,55 @@ bool UUtilityMenuWidget::Initialize() {
 }
 
 void UUtilityMenuWidget::BtnBestiaryOnClicked() {
-	UE_LOG(LogTemp,Warning,TEXT("Bestiary Pressed !!!"));
+	if (UtilityPageSwitcher == NULL) { return; }
+	if (MenuHeader == NULL) { return; }
+	if (BestiaryPage == NULL) { return; }
+
+	UtilityPageSwitcher->SetActiveWidget(BestiaryPage);
+	MenuHeader->SetText(FText::FromString("Bestiary"));
 }
 
 void UUtilityMenuWidget::BtnCraftingOnClicked() {
+	if (UtilityPageSwitcher == NULL) { return; }
+	if (MenuHeader == NULL) { return; }
+	if (CraftingPage == NULL) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Crafting Pressed !!!"));
+	UtilityPageSwitcher->SetActiveWidget(CraftingPage);
+	MenuHeader->SetText(FText::FromString("Crafting"));
 }
 
 void UUtilityMenuWidget::BtnInventoryOnClicked() {
+	if (UtilityPageSwitcher == NULL) { return; }
+	if (MenuHeader == NULL) { return; }
+	if (InventoryPage == NULL) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Inventory Pressed !!!"));
+	UtilityPageSwitcher->SetActiveWidget(InventoryPage);
+	MenuHeader->SetText(FText::FromString("Inventory"));
 }
 
 void UUtilityMenuWidget::BtnMainMenuOnClicked() {
-
-	UE_LOG(LogTemp, Warning, TEXT("MainMenu Pressed !!!"));
+	//TODO Implement Main Menu button clicked.
 }
 
 void UUtilityMenuWidget::BtnMapOnClicked() {
+	if (UtilityPageSwitcher == NULL) { return; }
+	if (MenuHeader == NULL) { return; }
+	if (MapPage == NULL) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Map Pressed !!!"));
+	UtilityPageSwitcher->SetActiveWidget(MapPage);
+	MenuHeader->SetText(FText::FromString("Map"));
 }
 
 void UUtilityMenuWidget::BtnOptionsOnClicked() {
-
-	UE_LOG(LogTemp, Warning, TEXT("Options Pressed !!!"));
+	//TODO Implement Options button clicked.
 }
 
 void UUtilityMenuWidget::BtnQuestOnClicked() {
+	if (UtilityPageSwitcher == NULL) { return; }
+	if (MenuHeader == NULL) { return; }
+	if (QuestPage == NULL) { return; }
 
-	UE_LOG(LogTemp, Warning, TEXT("Quest Pressed !!!"));
+	UtilityPageSwitcher->SetActiveWidget(QuestPage);
+	MenuHeader->SetText(FText::FromString("Quests"));
 }
 

@@ -43,6 +43,48 @@ protected:
 	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
 	class UWidgetSwitcher* UtilityPageSwitcher;
 
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UTextBlock* MenuHeader;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UWidget* BestiaryPage;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UWidget* CraftingPage;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UWidget* InventoryPage;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UWidget* MapPage;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UWidget* QuestPage;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Bestiary;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_BestiaryList;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Crafting;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Equipment;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Inventory;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Map;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_QuestDetail;
+
+	UPROPERTY(meta = (BindWidget), BlueprintReadWrite)
+	class UUserWidget* WBP_Quests;
+
 	UFUNCTION(BlueprintCallable,Category="Menu Selectors")
 	void BtnBestiaryOnClicked();
 
