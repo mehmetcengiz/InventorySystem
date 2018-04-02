@@ -16,7 +16,7 @@ UUtilityMenuWidget::UUtilityMenuWidget(const FObjectInitializer& ObjectInitializ
 void UUtilityMenuWidget::RemoveFromParent() {
 	
 	auto InventoryWidget = Cast<UInventoryWidget>(WBP_Inventory);
-	if(InventoryWidget) {
+	if(InventoryWidget != NULL) {
 		InventoryWidget->RemoveFromParent();
 	}
 
