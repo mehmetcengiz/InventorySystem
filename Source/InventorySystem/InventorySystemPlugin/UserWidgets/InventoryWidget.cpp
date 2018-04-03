@@ -29,6 +29,7 @@ void UInventoryWidget::RemoveFromParent() {
 	if(Spliter != NULL) {
 		Spliter->RemoveFromParent();
 	}
+
 	Super::RemoveFromParent();
 }
 
@@ -67,7 +68,6 @@ void UInventoryWidget::CreateItemSpliter() {
 }
 
 void UInventoryWidget::CreateItemSlots() {
-
 	UWorld* World = this->GetWorld();
 	if (!ensure(World != NULL)) return;
 
