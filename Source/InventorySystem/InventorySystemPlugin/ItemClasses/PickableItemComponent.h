@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/ActorComponent.h"
+#include "Components/SceneComponent.h"
 #include "Components/BoxComponent.h"
 
 #include "../InventorySystem/InventorySystemPlugin/Item.h"
@@ -11,26 +11,28 @@
 #include "PickableItemComponent.generated.h"
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
-class INVENTORYSYSTEM_API UPickableItemComponent : public UActorComponent
-{
+
+class INVENTORYSYSTEM_API UPickableItemComponent : public USceneComponent {
 GENERATED_BODY()
 
-public:	
+public:
 	// Sets default values for this component's properties
 	UPickableItemComponent();
 
 protected:
 	// Called when the game starts
-	virtual void BeginPlay() override;
+	void BeginPlay() override;
 
-public:	
+public:
 	// Called every frame
-	virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintReadWrite)
+	UPROPERTY(BlueprintReadWrite,Category="Component Settings")
 	UBoxComponent* PickUpTrigger = nullptr;
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadWrite, Category = "Inventory Items")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Items")
 	FItem ItemInformation;
-	
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component Settings")
+	FVector PickUpTriggerSize = FVector(15,15,15);
 };
