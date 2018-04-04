@@ -33,10 +33,10 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 }
 
 void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
-	auto ActorPickUpComponent = ActorToPickUP->FindComponentByClass(UPickableItemComponent::StaticClass());
-	if (ActorPickUpComponent != nullptr) {
+	auto actorPickUpComponent = ActorToPickUP->FindComponentByClass(UPickableItemComponent::StaticClass());
+	if (actorPickUpComponent != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("Lootable"));
-		UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(ActorPickUpComponent);
+		UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(actorPickUpComponent);
 		if (AddItemToInventory(pickable_item->ItemInformation)) {
 			ActorToPickUP->Destroy();
 		}
