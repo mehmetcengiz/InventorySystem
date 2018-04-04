@@ -27,12 +27,10 @@ public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(BlueprintReadWrite,Category="Component Settings")
+	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Component Settings")
 	UBoxComponent* PickUpTrigger = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Items")
 	FItem ItemInformation;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Component Settings")
-	FVector PickUpTriggerSize = FVector(15,15,15);
 };
