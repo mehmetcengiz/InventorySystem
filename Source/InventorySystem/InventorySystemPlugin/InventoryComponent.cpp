@@ -37,8 +37,19 @@ void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
 	if(ActorPickUpComponent != NULL) {
 		UE_LOG(LogTemp, Warning, TEXT("Lootable"));
 		UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(ActorPickUpComponent);
-		//InventoryItems.Add()
+		AddItemToInventory(pickable_item->ItemInformation);
+		ActorToPickUP->Destroy();		
+	}
+}
 
+void UInventoryComponent::AddItemToInventory(FItem Item) {
+	for (int i = 0; i<InventorySlotInfo.Num(); i++) {
+		if (InventorySlotInfo[i] == false) {
+			Item.SlotIndex = i;
+			InventorySlotInfo[i] = true;
+			InventoryItems.Add(Item);
+			return;
+		}
 	}
 }
 

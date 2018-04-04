@@ -60,7 +60,7 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 			InventoryWidgetRef->SwapItemsBySlot(DroppedItem->ItemInfo, ItemInfo);
 		}
 	}else {
-		if(InventoryWidgetRef->GetSplitFunctinalityEnabled()) {
+		if(InventoryWidgetRef->GetSplitFunctinalityEnabled() && DroppedItem->ItemInfo.bCombinable) {
 			//Open split Item
 			OpenSplitItemPanel(DroppedItem);
 		}else {

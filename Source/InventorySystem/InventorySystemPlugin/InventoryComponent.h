@@ -18,43 +18,46 @@ public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UFUNCTION(BlueprintCallable,Category="Inventory Items")
+	UFUNCTION(BlueprintCallable,Category="Inventory")
 	TArray<FItem> GetInventoryItems() { return InventoryItems; }
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	int32 GetInventorySize() { return InventorySize; }
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory Component")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void PickUpItem(AActor* ActorToPickUP);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void AddItemToInventory(FItem Item);
 
 protected:
 	// Called when the game starts
 	void BeginPlay() override;
 
-	UPROPERTY(EditAnywhere,Category = "Inventory Items")
+	UPROPERTY(EditAnywhere,Category = "Inventory")
 	TArray<FItem> InventoryItems;
 	
-	UPROPERTY(BlueprintReadWrite,Category = "Inventory Items")
+	UPROPERTY(BlueprintReadWrite,Category = "Inventory")
 	TArray<bool> InventorySlotInfo;
 
-	UPROPERTY(EditAnywhere, Category = "Inventory Options")
+	UPROPERTY(EditAnywhere, Category = "Inventory")
 	int32 InventorySize = 20;
 
-	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Inventory Options")
+	UPROPERTY(EditDefaultsOnly,BlueprintReadWrite, Category = "Inventory")
 	int32 MaxItemCountPerSlot = 9999;
 
 public:
 	
-	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SwapItemSlots(FItem DraggedItem, FItem DroppedTo);
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SetItemSlot(FItem Item, int32 NewSlot);
 	
-	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SplitItem(FItem ItemToSplit, int32 SplitQuantity, int32 NewSlot);
 
-	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void CombineItems(FItem ItemA, FItem ItemB);
 
 
