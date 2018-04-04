@@ -27,7 +27,7 @@ public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Items")
+	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Inventory Items")
 	FItem ItemInformation;
 
 };

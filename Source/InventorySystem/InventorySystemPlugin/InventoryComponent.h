@@ -28,7 +28,7 @@ public:
 	void PickUpItem(AActor* ActorToPickUP);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void AddItemToInventory(FItem Item);
+	bool AddItemToInventory(FItem Item);
 
 protected:
 	// Called when the game starts
