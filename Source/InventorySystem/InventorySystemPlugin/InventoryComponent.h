@@ -7,7 +7,6 @@
 #include "InventorySystemPlugin/Item.h"
 #include "InventoryComponent.generated.h"
 
-
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 
 class INVENTORYSYSTEM_API UInventoryComponent : public UActorComponent {
@@ -34,6 +33,9 @@ protected:
 
 	UPROPERTY(EditAnywhere,Category = "Inventory Items")
 	TArray<FItem> InventoryItems;
+	
+	UPROPERTY(BlueprintReadWrite,Category = "Inventory Items")
+	TArray<bool> InventorySlotInfo;
 
 	UPROPERTY(EditAnywhere, Category = "Inventory Options")
 	int32 InventorySize = 20;
@@ -55,4 +57,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
 	void CombineItems(FItem ItemA, FItem ItemB);
 
+
+private:
+	void CreateSlotInfo();
+	void DisableSlotByInventoryItems();
 };

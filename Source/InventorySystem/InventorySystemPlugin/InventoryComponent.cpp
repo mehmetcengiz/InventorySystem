@@ -19,7 +19,8 @@ UInventoryComponent::UInventoryComponent() {
 void UInventoryComponent::BeginPlay() {
 	Super::BeginPlay();
 
-	
+	CreateSlotInfo();
+	DisableSlotByInventoryItems();
 
 }
 
@@ -35,6 +36,9 @@ void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
 	auto ActorPickUpComponent = ActorToPickUP->FindComponentByClass(UPickableItemComponent::StaticClass());
 	if(ActorPickUpComponent != NULL) {
 		UE_LOG(LogTemp, Warning, TEXT("Lootable"));
+		UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(ActorPickUpComponent);
+		//InventoryItems.Add()
+
 	}
 }
 
@@ -72,6 +76,7 @@ void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
 		if (InventoryItems[i].SlotIndex == Item.SlotIndex) {
 			InventoryItems.RemoveAt(i);
+			InventorySlotInfo[Item.SlotIndex] = false;
 			break;
 		}
 	}
@@ -81,6 +86,7 @@ void UInventoryComponent::SetItemSlot(FItem Item, int32 NewSlot) {
 
 	//Add item back.
 	InventoryItems.Add(Item);
+	InventorySlotInfo[Item.SlotIndex] = true;
 }
 
 void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int32 NewSlot) {
@@ -95,6 +101,7 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 	//Delete Splited Item.
 	for(int32 i = 0; i<InventoryItems.Num(); i++) {
 		if(InventoryItems[i].SlotIndex == ItemToSplit.SlotIndex) {
+			InventorySlotInfo[ItemToSplit.SlotIndex] = false;
 			InventoryItems.RemoveAt(i);
 		}
 	}
@@ -106,8 +113,16 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 	ItemToSplit.Quantity -= SplitQuantity;
 
 	//Add items back.
-	if(SplitedItem.Quantity >=0)	InventoryItems.Add(SplitedItem);
-	if (ItemToSplit.Quantity >= 0)	InventoryItems.Add(ItemToSplit);
+	if (SplitedItem.Quantity >= 0) {
+		InventoryItems.Add(SplitedItem);
+		InventorySlotInfo[SplitedItem.SlotIndex] = true;
+	}
+
+	if (ItemToSplit.Quantity >= 0) {
+		InventoryItems.Add(ItemToSplit);
+		InventorySlotInfo[ItemToSplit.SlotIndex]= true;
+	}
+
 }
 
 void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
@@ -120,9 +135,11 @@ void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
 		if (InventoryItems[i].SlotIndex == ItemA.SlotIndex) {
 			InventoryItems.RemoveAt(i);
 			i--;
+			InventorySlotInfo[ItemA.SlotIndex]= false;
 		}else if(InventoryItems[i].SlotIndex == ItemB.SlotIndex) {
 			InventoryItems.RemoveAt(i);
 			i--;
+			InventorySlotInfo[ItemB.SlotIndex]= false;
 		}
 	}
 
@@ -130,13 +147,29 @@ void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
 	if((ItemA.Quantity + ItemB.Quantity) <= MaxItemCountPerSlot) {
 		ItemA.Quantity += ItemB.Quantity;
 		InventoryItems.Add(ItemA);
+		InventorySlotInfo[ItemA.SlotIndex] = true;
 	}else {
 		ItemB.Quantity = ((ItemB.Quantity + ItemA.Quantity) - MaxItemCountPerSlot);
 		ItemA.Quantity = MaxItemCountPerSlot;
 		InventoryItems.Add(ItemA);
 		InventoryItems.Add(ItemB);
+
+		InventorySlotInfo[ItemA.SlotIndex] = true;
+		InventorySlotInfo[ItemB.SlotIndex] = true;
 	}
 
+}
+
+void UInventoryComponent::CreateSlotInfo() {
+	for (int i = 0; i < InventorySize; i++) {		
+		InventorySlotInfo.Add(false);
+	}
+}
+
+void UInventoryComponent::DisableSlotByInventoryItems() {
+	for (auto item : InventoryItems) {
+		InventorySlotInfo[item.SlotIndex] = true;
+	}
 }
 
 
