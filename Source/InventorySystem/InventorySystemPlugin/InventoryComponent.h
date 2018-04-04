@@ -25,6 +25,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory Items")
 	int32 GetInventorySize() { return InventorySize; }
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory Component")
+	void PickUpItem(AActor* ActorToPickUP);
 
 protected:
 	// Called when the game starts

@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "Components/SceneComponent.h"
+#include "Components/ActorComponent.h"
 #include "Components/BoxComponent.h"
 
 #include "../InventorySystem/InventorySystemPlugin/Item.h"
@@ -12,7 +12,7 @@
 
 UCLASS( ClassGroup=(Custom), meta=(BlueprintSpawnableComponent) )
 
-class INVENTORYSYSTEM_API UPickableItemComponent : public USceneComponent {
+class INVENTORYSYSTEM_API UPickableItemComponent : public UActorComponent {
 GENERATED_BODY()
 
 public:
@@ -26,9 +26,6 @@ protected:
 public:
 	// Called every frame
 	void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
-
-	UPROPERTY(EditAnywhere,BlueprintReadWrite,Category="Component Settings")
-	UBoxComponent* PickUpTrigger = nullptr;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Inventory Items")
 	FItem ItemInformation;

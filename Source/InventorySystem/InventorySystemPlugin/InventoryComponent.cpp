@@ -2,6 +2,9 @@
 
 #include "InventoryComponent.h"
 
+#include "GameFramework/Actor.h"
+
+#include "InventorySystemPlugin/ItemClasses/PickableItemComponent.h"
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent() {
@@ -26,6 +29,13 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
 
 	// ...
+}
+
+void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
+	auto ActorPickUpComponent = ActorToPickUP->FindComponentByClass(UPickableItemComponent::StaticClass());
+	if(ActorPickUpComponent != NULL) {
+		UE_LOG(LogTemp, Warning, TEXT("Lootable"));
+	}
 }
 
 void UInventoryComponent::SwapItemSlots(FItem DraggedItem, FItem DroppedTo) {
