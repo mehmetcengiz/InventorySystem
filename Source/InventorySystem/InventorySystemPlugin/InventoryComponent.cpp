@@ -46,18 +46,22 @@ void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
 bool UInventoryComponent::AddItemToInventory(FItem Item) {
 
 	if (Item.bCombinable) {
+		//Item is combinable item.
 		for (int i = 0; i < InventoryItems.Num(); i++) {
 			if (Item.ItemName.EqualTo(InventoryItems[i].ItemName)) {
 				//Inventory has same item.
 				if ((InventoryItems[i].Quantity + Item.Quantity) <= MaxItemCountPerSlot) {
+					//Item slot has space for new item
 					InventoryItems[i].Quantity += Item.Quantity;
 					return true;
 				}
 				
 				if(InventoryItems[i].Quantity<MaxItemCountPerSlot) {
+					//Item slot fills the available space.
 					int32 availableSpace = MaxItemCountPerSlot - InventoryItems[i].Quantity;
 					InventoryItems[i].Quantity += availableSpace;
 					Item.Quantity -= availableSpace;
+					//Then put the rest somewhere else.
 					for (int i = 0; i < InventorySlotInfo.Num(); i++) {
 						if (InventorySlotInfo[i] == false) {
 							Item.SlotIndex = i;
@@ -72,6 +76,7 @@ bool UInventoryComponent::AddItemToInventory(FItem Item) {
 		}
 	}
 	else {
+		//Item is not combinable.
 		for (int i = 0; i < InventorySlotInfo.Num(); i++) {
 			if (InventorySlotInfo[i] == false) {
 				Item.SlotIndex = i;
