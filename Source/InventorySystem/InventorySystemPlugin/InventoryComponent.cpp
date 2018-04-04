@@ -53,19 +53,21 @@ bool UInventoryComponent::AddItemToInventory(FItem Item) {
 					InventoryItems[i].Quantity += Item.Quantity;
 					return true;
 				}
-				int32 availableSpace = MaxItemCountPerSlot - InventoryItems[i].Quantity;
-				InventoryItems[i].Quantity += availableSpace;
-				Item.Quantity -= availableSpace;
-				for (int i = 0; i < InventorySlotInfo.Num(); i++) {
-					if (InventorySlotInfo[i] == false) {
-						Item.SlotIndex = i;
-						InventorySlotInfo[i] = true;
-						InventoryItems.Add(Item);
-						return true;
+				
+				if(InventoryItems[i].Quantity<MaxItemCountPerSlot) {
+					int32 availableSpace = MaxItemCountPerSlot - InventoryItems[i].Quantity;
+					InventoryItems[i].Quantity += availableSpace;
+					Item.Quantity -= availableSpace;
+					for (int i = 0; i < InventorySlotInfo.Num(); i++) {
+						if (InventorySlotInfo[i] == false) {
+							Item.SlotIndex = i;
+							InventorySlotInfo[i] = true;
+							InventoryItems.Add(Item);
+							return true;
+						}
 					}
 				}
-				UE_LOG(LogTemp, Warning, TEXT("Not enought space !!"));
-				return false;
+
 			}
 		}
 	}
