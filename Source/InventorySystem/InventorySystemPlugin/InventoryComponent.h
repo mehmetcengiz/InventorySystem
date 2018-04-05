@@ -61,7 +61,10 @@ public:
 	void CombineItems(FItem ItemA, FItem ItemB);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
-	void DropItem(FItem Item);
+	void DropItemFromInventory(FItem Item);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SpawnItem(FItem Item) const;
 
 
 private:

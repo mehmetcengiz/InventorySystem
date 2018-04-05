@@ -22,30 +22,34 @@ public:
 
 	virtual void RemoveFromParent() override;
 
-	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	UFUNCTION(BlueprintCallable,Category="InventoryWidget")
 	void SwapItemsBySlot(FItem DraggedItem, FItem DroppedTo);
 
-	UFUNCTION(BlueprintCallable,Category="DragDrop")
+	UFUNCTION(BlueprintCallable,Category="InventoryWidget")
 	void CombineItems(FItem DraggedItem, FItem DroppedTo);
 
-	UFUNCTION(BlueprintCallable, Category = "DragDrop")
+	UFUNCTION(BlueprintCallable, Category = "InventoryWidget")
 	void ChangeItemSlot(FItem Item, int32 NewSlot);
 
-	UFUNCTION(BlueprintCallable, Category = "DragDrop")
+	UFUNCTION(BlueprintCallable, Category = "InventoryWidget")
 	void SplitItem(FItem Item, int32 SplitQuantity, int32 NewSlot);
 	
+	UFUNCTION(BlueprintCallable, Category = "InventoryWidget")
+	void RefreshInventory();
+	
 	/*Getter Setters*/
-	UFUNCTION(BlueprintCallable, Category = "Getter Setter")
+	UFUNCTION(BlueprintCallable, Category = "InventoryWidget")
 	void SetSplitFunctionalityEnabled(bool BoolToSet) { bIsSplitFunctionalityEnabled = BoolToSet; }
 
-	UFUNCTION(BlueprintCallable,Category = "Getter Setter")
+	UFUNCTION(BlueprintCallable,Category = "InventoryWidget")
 	bool GetSplitFunctinalityEnabled() const { return bIsSplitFunctionalityEnabled; }
 
-	UFUNCTION(BlueprintCallable, Category = "Getter Setter")
+	UFUNCTION(BlueprintCallable, Category = "InventoryWidget")
 	void SetItemSpliter(UQuantitySpliterWidget* SpliterRef) { Spliter = SpliterRef; }
 
-	UFUNCTION(BlueprintCallable,Category = "Getter Setter")
+	UFUNCTION(BlueprintCallable,Category = "InventoryWidget")
 	UQuantitySpliterWidget* GetQuantitySpliterWidget() const { return Spliter; }
+
 
 protected:
 	virtual bool Initialize() override;
@@ -80,6 +84,8 @@ private:
 	void GetCharacterInventoryComponentRef();
 	void CreateItemSpliter();
 	void CreateItemSlots();
-	void RefreshInventory();
+
+
+	
 
 };

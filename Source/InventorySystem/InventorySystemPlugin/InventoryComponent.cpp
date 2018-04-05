@@ -72,7 +72,7 @@ bool UInventoryComponent::AddItemToInventory(FItem Item) {
 							return true;
 						}
 					}
-					DropItem(Item);
+					SpawnItem(Item);
 					return true;
 				}
 
@@ -216,7 +216,21 @@ void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
 
 }
 
-void UInventoryComponent::DropItem(FItem Item) {
+void UInventoryComponent::DropItemFromInventory(FItem Item) {
+	//Delete Splited Item.
+	for (int32 i = 0; i < InventoryItems.Num(); i++) {
+		if (InventoryItems[i].SlotIndex == Item.SlotIndex) {
+			InventorySlotInfo[Item.SlotIndex] = false;
+			InventoryItems.RemoveAt(i);
+		}
+	}
+
+	SpawnItem(Item);
+
+	
+}
+
+void UInventoryComponent::SpawnItem(FItem Item) const {
 	UWorld* World = GetWorld();
 	if (!ensure(World != NULL)) return;
 	
