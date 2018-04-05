@@ -72,6 +72,8 @@ bool UInventoryComponent::AddItemToInventory(FItem Item) {
 							return true;
 						}
 					}
+					DropItem(Item);
+					return true;
 				}
 
 			}
