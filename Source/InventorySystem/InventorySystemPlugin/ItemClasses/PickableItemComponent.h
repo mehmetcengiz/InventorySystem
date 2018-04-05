@@ -29,5 +29,8 @@ public:
 
 	UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Inventory Items")
 	FItem ItemInformation;
+	
+	UFUNCTION(BlueprintCallable)
+	void SetQuaintity(int32 QuantityToSet) { ItemInformation.Quantity = QuantityToSet; }
 
 };

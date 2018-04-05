@@ -60,6 +60,9 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void CombineItems(FItem ItemA, FItem ItemB);
 
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void DropItem(FItem Item);
+
 
 private:
 	void CreateSlotInfo();

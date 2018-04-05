@@ -3,8 +3,10 @@
 #include "InventoryComponent.h"
 
 #include "GameFramework/Actor.h"
+#include "Engine/World.h"
 
 #include "InventorySystemPlugin/ItemClasses/PickableItemComponent.h"
+#include "Item.h"
 
 // Sets default values for this component's properties
 UInventoryComponent::UInventoryComponent() {
@@ -34,8 +36,8 @@ void UInventoryComponent::TickComponent(float DeltaTime, ELevelTick TickType,
 
 void UInventoryComponent::PickUpItem(AActor* ActorToPickUP) {
 	auto actorPickUpComponent = ActorToPickUP->FindComponentByClass(UPickableItemComponent::StaticClass());
-	if (actorPickUpComponent != nullptr) {
 		UE_LOG(LogTemp, Warning, TEXT("Lootable"));
+	if (actorPickUpComponent != nullptr) {
 		UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(actorPickUpComponent);
 		if (AddItemToInventory(pickable_item->ItemInformation)) {
 			ActorToPickUP->Destroy();
@@ -209,6 +211,28 @@ void UInventoryComponent::CombineItems(FItem ItemA, FItem ItemB) {
 		InventorySlotInfo[ItemA.SlotIndex] = true;
 		InventorySlotInfo[ItemB.SlotIndex] = true;
 	}
+
+}
+
+void UInventoryComponent::DropItem(FItem Item) {
+	UWorld* World = GetWorld();
+	if (!ensure(World != NULL)) return;
+	
+	AActor* OwnerPlayer = GetOwner();
+	if (!ensure(OwnerPlayer != NULL)) return;
+
+	FActorSpawnParameters SpawnInfo;
+	const FVector Location = OwnerPlayer->GetActorLocation();
+	const FRotator Rotation = OwnerPlayer->GetActorRotation();
+	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
+
+	AActor* DroppedItem = World->SpawnActor<AActor>(Item.ActorClass,Location,Rotation, SpawnInfo);
+	if (!ensure(DroppedItem != NULL)) return;
+	auto actorPickUpComponent = DroppedItem->FindComponentByClass(UPickableItemComponent::StaticClass());
+	if (!ensure(actorPickUpComponent != NULL)) return;
+	UPickableItemComponent* pickable_item = Cast<UPickableItemComponent>(actorPickUpComponent);
+
+	pickable_item->SetQuaintity(Item.Quantity);
 
 }
 

@@ -21,6 +21,9 @@ struct FItem{
 	GENERATED_BODY()
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
+	UClass* ActorClass;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
 	FText ItemName;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Item Details")
