@@ -1,6 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #include "PickableItemComponent.h"
+#include "Components/StaticMeshComponent.h"
 
 
 // Sets default values for this component's properties
@@ -14,7 +15,12 @@ UPickableItemComponent::UPickableItemComponent() {
 // Called when the game starts
 void UPickableItemComponent::BeginPlay() {
 	Super::BeginPlay();
-	
+	AActor* Owner = GetOwner();
+	if (!ensure(Owner != NULL)) return;
+	auto SMesh = Cast<UStaticMeshComponent>(Owner->FindComponentByClass(UStaticMeshComponent::StaticClass()));
+	if (!ensure(SMesh != NULL)) return;
+	SMesh->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);
+	//SMesh->Collision
 }
 
 
