@@ -78,6 +78,16 @@ bool UInventoryComponent::AddItemToInventory(FItem Item) {
 
 			}
 		}
+
+		for(int i = 0; i < InventorySlotInfo.Num(); i++){
+			if (InventorySlotInfo[i] == false){
+				Item.SlotIndex = i;
+				InventorySlotInfo[i] = true;
+				InventoryItems.Add(Item);
+				return true;
+			}
+		}
+
 	}
 	else {
 		//Item is not combinable.
