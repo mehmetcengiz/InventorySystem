@@ -159,8 +159,29 @@ void UInventoryComponent::SplitItem(FItem ItemToSplit, int32 SplitQuantity, int3
 	if (!ItemToSplit.bCombinable) return;
 	if (SplitQuantity <= 0) return;
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {
-		if (InventoryItems[i].SlotIndex == NewSlot) return;
+		if (InventoryItems[i].SlotIndex == NewSlot){
+			if(InventoryItems[i].ItemName.EqualTo(ItemToSplit.ItemName)){
+				if (InventoryItems[i].Quantity + SplitQuantity > 9999) { return; }
+				InventoryItems[i].Quantity += SplitQuantity;
+				ItemToSplit.Quantity -= SplitQuantity;
+
+				//Delete Splited Item.
+				for (int32 i = 0; i < InventoryItems.Num(); i++) {
+					if (InventoryItems[i].SlotIndex == ItemToSplit.SlotIndex) {
+						InventorySlotInfo[ItemToSplit.SlotIndex] = false;
+						InventoryItems.RemoveAt(i);
+					}
+				}
+				
+				if (ItemToSplit.Quantity >= 0) {
+					InventoryItems.Add(ItemToSplit);
+					InventorySlotInfo[ItemToSplit.SlotIndex] = true;
+				}
+			}
+			return;
+		}
 	}
+
 
 	//Delete Splited Item.
 	for (int32 i = 0; i < InventoryItems.Num(); i++) {

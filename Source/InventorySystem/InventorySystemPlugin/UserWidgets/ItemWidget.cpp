@@ -54,7 +54,11 @@ void UItemWidget::OnItemDrop(UItemWidget* DroppedItem) {
 	if(bIsSlotHasItem) {
 		if(ItemInfo.ItemName.EqualTo(DroppedItem->ItemInfo.ItemName)) {
 			//Combine
-			InventoryWidgetRef->CombineItems(ItemInfo, DroppedItem->ItemInfo);
+			if(InventoryWidgetRef->GetSplitFunctinalityEnabled()){
+				OpenSplitItemPanel(DroppedItem);
+			}else{
+				InventoryWidgetRef->CombineItems(ItemInfo, DroppedItem->ItemInfo);
+			}
 		}else {
 			//Swap
 			InventoryWidgetRef->SwapItemsBySlot(DroppedItem->ItemInfo, ItemInfo);
