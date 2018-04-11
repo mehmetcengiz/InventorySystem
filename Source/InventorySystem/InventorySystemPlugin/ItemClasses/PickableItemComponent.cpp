@@ -15,12 +15,6 @@ UPickableItemComponent::UPickableItemComponent() {
 // Called when the game starts
 void UPickableItemComponent::BeginPlay() {
 	Super::BeginPlay();
-	AActor* Owner = GetOwner();
-	if (!ensure(Owner != NULL)) return;
-	auto SMesh = Cast<UStaticMeshComponent>(Owner->FindComponentByClass(UStaticMeshComponent::StaticClass()));
-	if (!ensure(SMesh != NULL)) return;
-	SMesh->SetCollisionObjectType(ECollisionChannel::ECC_GameTraceChannel1);
-	//SMesh->Collision
 }
 
 
