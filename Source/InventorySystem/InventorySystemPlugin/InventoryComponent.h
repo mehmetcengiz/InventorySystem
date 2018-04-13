@@ -67,7 +67,12 @@ public:
 	void SpawnItem(FItem Item) const;
 
 
+
 private:
 	void CreateSlotInfo();
 	void DisableSlotByInventoryItems();
+
+	UFUNCTION()
+	void DeleteFromInventoryItems(FItem ItemToDelete);
+
 };
