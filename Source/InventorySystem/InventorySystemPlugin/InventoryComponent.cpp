@@ -221,6 +221,23 @@ void UInventoryComponent::DropItemFromInventory(FItem Item) {
 	
 }
 
+void UInventoryComponent::SplitAndDropItem(FItem ItemToSplit, int32 SplitQuantity) {
+	//Conditions to NOT SPLIT
+	if (!ItemToSplit.bCombinable) return;
+	if (SplitQuantity <= 0) return;
+
+	for (int32 i = 0; i < InventoryItems.Num(); i++) {
+		if(InventoryItems[i].SlotIndex == ItemToSplit.SlotIndex) {
+			InventoryItems[i].Quantity -= SplitQuantity;
+		}
+	}
+
+	FItem ItemToDrop = ItemToSplit;
+	ItemToDrop.Quantity = SplitQuantity;
+
+	SpawnItem(ItemToDrop);
+}
+
 void UInventoryComponent::SpawnItem(FItem Item) const {
 	UWorld* World = GetWorld();
 	if (!ensure(World != NULL)) return;

@@ -64,6 +64,9 @@ public:
 	void DropItemFromInventory(FItem Item);
 
 	UFUNCTION(BlueprintCallable, Category = "Inventory")
+	void SplitAndDropItem(FItem ItemToSplit, int32 SplitQuantity);
+
+	UFUNCTION(BlueprintCallable, Category = "Inventory")
 	void SpawnItem(FItem Item) const;
 
 
